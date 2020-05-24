@@ -1,0 +1,12 @@
+{
+    "require": {
+        "league/flysystem": "^1.0",
+        "intervention/image": "^2.5"
+    },
+
+    "autoload": {
+        "classmap": [
+            "Classes/"
+        ]
+    }
+}
