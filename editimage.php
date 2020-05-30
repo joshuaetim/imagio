@@ -48,8 +48,10 @@
                     <div class="col-md-6">
                         <div class="image-preview">
                         </div>
-                        <h2 id="result"></h2>
-                        <form action="#" method="POST" class="container p-2" enctype="multipart/form-data">
+                        <div id="result" class="ml-3">
+                        
+                        </div>
+                        <form action="#" method="POST" class="container ml-2" enctype="multipart/form-data">
                             <p>
                                 <?php
                                     if(isset($error)){

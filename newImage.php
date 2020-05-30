@@ -17,31 +17,13 @@
 
         $image = $photo->makeImage($location);
 
-        if($grayscale > 0)
-        {
-            $edits = array(
+        $edits = array(
                 'blur' => $blur,
                 'greyscale' => $grayscale,
                 'brightness' => $brightness,
                 'opacity' => $opacity,
                 'invert' => $invert
             );
-        }
-
-        if($invert > 0)
-        {
-
-        }
-
-        else
-        {
-            $edits = array(
-                'blur' => $blur,
-                'brightness' => $brightness,
-                'opacity' => $opacity,
-                'invert' => $invert
-            );
-        }
 
         $name = substr($location, strrpos($location, '/')+1);
 
@@ -53,11 +35,11 @@
 
         if($result)
         {
-            echo 'Successful';
+            echo '<p class="text-success">Changes made sucessfully</p>';
         }
         else
         {
-            echo 'Failed';
+            echo '<p class="text-danger">Failed to make changes</p>';
         }
 
         // echo $name;

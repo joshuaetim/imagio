@@ -71,7 +71,9 @@ class Photo extends Database
 
         foreach($edits as $key=>$value)
         {
-            $img->$key($value);
+            if($value != 0){
+                $img->$key($value);
+            }
         }
         $res = $img->save('storage/'.$name);
 

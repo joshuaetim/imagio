@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <form action="">
-        <input type="text" name="name">
-        <input type="text" name="title">
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+<?php
+    
+    require __DIR__.'/vendor/autoload.php';
+
+    use Intervention\Image\ImageManagerStatic as Image;
+
+    $img = Image::make('storage/2020MayFri1105542020Apr271104121fungi.jpg');
+
+    echo $img->response();
+
+?>
