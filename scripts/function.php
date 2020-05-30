@@ -25,5 +25,13 @@ function activeCheck($link, $page)
     }
 }
 
+function echoSpace(array $items)
+{
+    foreach($items as $key=>$value)
+    {
+        echo $value . ' ';
+    }
+}
+
 
 ?>

@@ -25,8 +25,7 @@
                             <!-- <label for="blur">Grayscale</label>
                             <p><input type="range" id="grayscale" name="grayscale" max="100" min="0" value="0" class="edit custom-range w-75"></p> -->
 
-                            <label for="blur">Invert</label>
-                            <p><input type="range" id="invert" name="invert" max="100" min="0" value="0" class="edit custom-range w-75"></p>
+                            
 
                             <label for="blur">Opacity</label>
                             <p><input type="range" id="opacity" name="opacity" max="100" min="0" value="100" class="edit custom-range w-75"></p>
@@ -34,6 +33,11 @@
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" class="custom-control-input edit" id="grayscale" name="example1" value="100">
                                 <label class="custom-control-label" for="grayscale">Black & White</label>
+                            </div>
+
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input edit" id="invert" name="invert" value="100">
+                                <label class="custom-control-label" for="invert">Invert</label>
                             </div>
                             
                         </div>
@@ -101,8 +105,14 @@
                 else{
                     var grayscale = 0;
                 }
+                if($('#invert').prop("checked")){
+                    var invert = $('#invert').val();
+                    // alert('yes');
+                }
+                else{
+                    var invert = 0;
+                }
                 var brightness = $('#brightness').val();
-                var invert = $('#invert').val();
                 var opacity = $('#opacity').val();
                 $(".image-preview img").css('-webkit-filter', 'blur('+ blur + 'px) grayscale(' + grayscale +'%) brightness(' + brightness +'%) invert(' + invert +'%) opacity(' + opacity +'%)');
             });
@@ -117,8 +127,14 @@
                 else{
                     var grayscale = 0;
                 }
+                if($('#invert').prop("checked")){
+                    var invert = $('#invert').val();
+                    // alert('yes');
+                }
+                else{
+                    var invert = 0;
+                }
                 var brightness = $('#brightness').val();
-                var invert = $('#invert').val();
                 var opacity = $('#opacity').val();
                 var location = $('#location').val();
                 $.ajax('newImage.php',{

@@ -1,18 +1,10 @@
 <?php
 
-    ini_set('max_execution_time', 300);
+    ini_set('max_execution_time', 300); // increase max execution time
 
     require __DIR__.'/vendor/autoload.php';
 
     $photo = new Photo;
-
-    function echoSpace(array $items)
-    {
-        foreach($items as $key=>$value)
-        {
-            echo $value . ' ';
-        }
-    }
 
     if(isset($_POST['edit']))
     {
@@ -35,6 +27,12 @@
                 'invert' => $invert
             );
         }
+
+        if($invert > 0)
+        {
+
+        }
+
         else
         {
             $edits = array(

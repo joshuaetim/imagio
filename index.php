@@ -26,29 +26,10 @@
 
     if(isset($_POST['delete']))
     {
-        $photoID = $_POST['delete'];
-        $thumb = $_POST['thumb'];
-        $location = $_POST['location'];
+        $thumb = urlencode($_POST['thumb']);
+        $location = urlencode($_POST['location']);
 
-        // $_SESSION['form_success'] = $photoID . ' <br> ' . $thumb . ' <br> ' . $location;
-
-        $deleteHandle = $photo->deleteImage($photoID, $query['id']);
-        
-        if($deleteHandle > 0)
-        {
-            $fileDelete = $filesystem->delete($location);
-
-            if($fileDelete)
-            {
-                $_SESSION['form_success'] = 'File successfully deleted';
-
-                // header("Location: index");
-            }
-        }
-        else
-        {
-            $_SESSION['form_fail'] = 'Error in submission';
-        }
+        header("Location: delete.php?token=JoshSecretKey&delete={$_POST['delete']}&thumb={$thumb}&location={$location}");
     }
 
     function checkSessionSet($name, $condition)

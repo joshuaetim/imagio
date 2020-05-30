@@ -31,6 +31,14 @@ class Photo extends Database
         return array($query, $query->rowCount());
     }
 
+    public function updateImage($id, $user_id, $title)
+    {
+        $query = $this->link->prepare("UPDATE photos SET `title`='?' WHERE `id`='$id' AND `user_id`='$user_id'");
+        $values = array($title);
+        $query->execute($values);
+        return $query->rowCount();
+    }
+
     public function deleteImage($id, $user_id)
     {
         $query = $this->link->query("DELETE FROM photos WHERE `id`='$id' AND `user_id`='$user_id'");
