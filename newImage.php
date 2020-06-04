@@ -1,10 +1,18 @@
 <?php
 
+    require 'includes/auth_check.php';
+
     ini_set('max_execution_time', 300); // increase max execution time
 
     require __DIR__.'/vendor/autoload.php';
 
     $photo = new Photo;
+
+    $auth = new Auth;
+
+    $authQuery = $auth->getInfo($_SESSION['user'])->fetch();
+
+    $userID = $authQuery['id'];
 
     if(isset($_POST['edit']))
     {
@@ -35,7 +43,26 @@
 
         if($result)
         {
-            echo '<p class="text-success">Changes made sucessfully</p>';
+            if(isset($_POST['title']) && isset($_POST['id']) && !empty($_POST['title']) && !empty($_POST['id']))
+            {
+                $title = $_POST['title'];
+
+                $id = $_POST['id'];
+
+                $changeTitle = $photo->updateImage($id, $userID, $title);
+
+                // echoSpace([$title, $id, $userID]);
+
+                if($changeTitle > 0)
+                {
+                    echo '<p class="text-success">Changes made sucessfully</p>';
+                }
+
+                else
+                {
+                    echo '<p class="text-success">Image edited successfully.</p>';
+                }
+            }
         }
         else
         {

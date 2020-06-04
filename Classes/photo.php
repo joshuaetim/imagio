@@ -33,9 +33,7 @@ class Photo extends Database
 
     public function updateImage($id, $user_id, $title)
     {
-        $query = $this->link->prepare("UPDATE photos SET `title`='?' WHERE `id`='$id' AND `user_id`='$user_id'");
-        $values = array($title);
-        $query->execute($values);
+        $query = $this->link->query("UPDATE photos SET `title`='$title' WHERE `id`='$id' AND `user_id`='$user_id'");
         return $query->rowCount();
     }
 

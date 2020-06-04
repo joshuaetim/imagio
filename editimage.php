@@ -19,7 +19,7 @@
                             <label for="blur">Blur</label>
                             <p><input type="range" id="blur" name="blur" max="10" min="" value="0" class="edit custom-range w-75"></p>
 
-                            <label for="blur">Brightness</label>
+                            <label for="blur">Brightness (<span id="bVal">100</span>)</label>
                             <p><input type="range" id="brightness" name="brightness" max="200" min="0" value="100" class="edit custom-range w-75"></p>
 
                             <!-- <label for="blur">Grayscale</label>
@@ -62,8 +62,9 @@
                             <input type="hidden" name="user_id" value="<?=$query['id']?>">
                             <div class="form-group">
                                 <label for="name">Image Title</label>
-                                <input type="text" name="title" class="form-control" value="<?=$imageDetails['title']?>">
+                                <input type="text" name="title" id="title" class="form-control" value="<?=$imageDetails['title']?>">
                                 <input type="hidden" id="location" value="<?=$imageDetails['location']?>">
+                                <input type="hidden" id="id" value="<?=$imageDetails['id']?>">
                             </div>
                             <p>
                                 <button type="submit" id="formSubmit" class="btn btn-primary">
@@ -115,6 +116,7 @@
                     var invert = 0;
                 }
                 var brightness = $('#brightness').val();
+                $('#bVal').text(brightness);
                 var opacity = $('#opacity').val();
                 $(".image-preview img").css('-webkit-filter', 'blur('+ blur + 'px) grayscale(' + grayscale +'%) brightness(' + brightness +'%) invert(' + invert +'%) opacity(' + opacity +'%)');
             });
@@ -139,9 +141,11 @@
                 var brightness = $('#brightness').val();
                 var opacity = $('#opacity').val();
                 var location = $('#location').val();
+                var id = $('#id').val();
+                var title = $('#title').val();
                 $.ajax('newImage.php',{
                     type: "POST",
-                    data: {edit:'valid', blur:blur, grayscale:grayscale, brightness:brightness, invert:invert, opacity:opacity, location:location},
+                    data: {edit:'valid', blur:blur, grayscale:grayscale, brightness:brightness, invert:invert, opacity:opacity, location:location, title:title, id:id},
                     beforeSend: function(){
                         $("#formSubmit").html('<img src="images/spin.gif" alt="" style="width: 20px;" class="spin hide"> Applying Changes ...');
                     },
