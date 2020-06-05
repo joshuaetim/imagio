@@ -83,6 +83,9 @@
     </div>
     <script>
         $(document).ready(function(){
+
+            /* AJAX call to load images after page has finished loading */
+
             $.ajax('editcode.php?id=<?=$id?>',
             {
                 type: 'POST',
@@ -95,9 +98,9 @@
                 }
             }
             );
-            $('#grayscale').on('change', function(){
-                
-            });
+
+            /* Edit Buttons events */
+
             $('input.edit').on('change', function(){
                 event.preventDefault();
                 var blur = $('#blur').val();
@@ -121,19 +124,25 @@
                 $(".image-preview img").css('-webkit-filter', 'blur('+ blur + 'px) grayscale(' + grayscale +'%) brightness(' + brightness +'%) invert(' + invert +'%) opacity(' + opacity +'%)');
             });
 
+            /* Form Submit event listener.
+            This grabs the values from the input fields and passes them as AJAX POST variables. 
+            This allows the edits to be done without the page reloading. 
+            
+            Note: The #grayscale and #invert fields are radio buttons, so they require a different type of value handling (binary, clicked or not, 0 or 100) */
+
             $("#formSubmit").on('click', function(){
                 event.preventDefault();
+
                 var blur = $('#blur').val();
+
                 if($('#grayscale').prop("checked")){
                     var grayscale = $('#grayscale').val();
-                    // alert('yes');
                 }
                 else{
                     var grayscale = 0;
                 }
                 if($('#invert').prop("checked")){
                     var invert = $('#invert').val();
-                    // alert('yes');
                 }
                 else{
                     var invert = 0;
@@ -143,6 +152,9 @@
                 var location = $('#location').val();
                 var id = $('#id').val();
                 var title = $('#title').val();
+
+                // ajax call to newImage.php
+
                 $.ajax('newImage.php',{
                     type: "POST",
                     data: {edit:'valid', blur:blur, grayscale:grayscale, brightness:brightness, invert:invert, opacity:opacity, location:location, title:title, id:id},
