@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Auth' => $baseDir . '/Classes/auth.php',
     'Database' => $baseDir . '/Classes/db.php',
+    'File' => $baseDir . '/Classes/File.php',
     'Photo' => $baseDir . '/Classes/photo.php',
     'Upload' => $baseDir . '/Classes/upload.php',
 );

@@ -52,6 +52,7 @@ class ComposerStaticInitc59bcaae2c79e9d301b3044e27f5756d
     public static $classMap = array (
         'Auth' => __DIR__ . '/../..' . '/Classes/auth.php',
         'Database' => __DIR__ . '/../..' . '/Classes/db.php',
+        'File' => __DIR__ . '/../..' . '/Classes/File.php',
         'Photo' => __DIR__ . '/../..' . '/Classes/photo.php',
         'Upload' => __DIR__ . '/../..' . '/Classes/upload.php',
     );
