@@ -1,5 +1,13 @@
 <?php
 
+    require 'includes/auth_check.php';
+
+    require __DIR__.'/vendor/autoload.php';
+
+    $auth = new Auth;
+
+    $query = $auth->getInfo($_SESSION['user'])->fetch();
+    
     if(isset($_GET['root']) && !empty($_GET['root']))
     {
         $mainDir = $_GET['root'];
@@ -11,10 +19,10 @@
         }
     }
     else{
-        $mainDir = 'nicer';
+        $mainDir = $query['username'];
     }
 
-    require __DIR__.'/vendor/autoload.php';
+    // return var_dump($query['username']);
 
     use League\Flysystem\Filesystem;
     use League\Flysystem\Adapter\Local;

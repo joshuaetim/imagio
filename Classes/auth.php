@@ -24,7 +24,8 @@ class Auth extends Database
 
     public function loginUser($username, $password)
     {
-        $query = $this->link->query("SELECT * FROM users WHERE `username`='$username' AND `password`='$password'");
+        $query = $this->link->prepare("SELECT * FROM users WHERE `username`= ? AND `password`= ? ");
+        $query->execute([$username, $password]);
         return $query->rowCount();
 
         //return $this->link;

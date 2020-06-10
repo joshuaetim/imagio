@@ -39,7 +39,8 @@
                 if($checkImg){
 
                     $details = $upload->getDetails($_FILES['image']);
-                    $filename = date("YMDhms").$details['name'];
+                    $filename = $query['username'].'/'.date("YMDhms").$details['name'];
+                    $thumbLocation = 'storage/'.$query['username'].'/thumbnails/'.date("YMDhms").$details['name'];
 
                     // store image with flysystem
                     $stream = fopen($details['temp'], 'r+');
@@ -56,7 +57,7 @@
 
                         // resize image for thumbnail
 
-                        $thumbnail = $photo->createThumb($location, $filename);
+                        $thumbnail = $photo->createThumb($location, $thumbLocation);
 
                         /* Make location name, instantiate Photo class, and add to database */
 

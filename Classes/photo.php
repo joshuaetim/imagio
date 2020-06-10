@@ -40,7 +40,8 @@ class Photo extends Database
 
     public function updateImage($id, $user_id, $title)
     {
-        $query = $this->link->query("UPDATE photos SET `title`='$title' WHERE `id`='$id' AND `user_id`='$user_id'");
+        $query = $this->link->prepare("UPDATE photos SET `title`= ? WHERE `id`='$id' AND `user_id`='$user_id'");
+        $query->execute([$title]);
         return $query->rowCount();
     }
 
@@ -59,7 +60,7 @@ class Photo extends Database
         $width = $img->width();
         $ratio = round($width/$height, 1);
         $img->resize(400, 400/$ratio);
-        $thumbnail = 'storage/thumbnails/'.$filename;
+        $thumbnail = $filename;
         $img->save($thumbnail);
         return $thumbnail;
     }
@@ -69,7 +70,7 @@ class Photo extends Database
         return Image::make($location);
     }
 
-    public function makeEdits(array $edits, $name, $location)
+    public function makeEdits(array $edits, $name, $location, $username)
     {
         $img = Image::make($location);
         $filePath = 'http://localhost/intervention/storage/new/';
@@ -80,9 +81,11 @@ class Photo extends Database
                 $img->$key($value);
             }
         }
-        $res = $img->save('storage/'.$name);
+        $res = $img->save('storage/'.$username.'/'.$name);
 
-        $thumbRes = $this->createThumb($location, $name);
+        $thumbLocation = 'storage/'.$username.'/thumbnails/'.$name;
+
+        $thumbRes = $this->createThumb($location, $thumbLocation);
 
         if($res && $thumbRes)
         {

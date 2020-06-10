@@ -12,6 +12,8 @@
 
     $authQuery = $auth->getInfo($_SESSION['user'])->fetch();
 
+    $username = $authQuery['username'];
+
     $userID = $authQuery['id'];
 
     if(isset($_POST['edit']))
@@ -39,7 +41,7 @@
 
         // print_r($edits);
 
-        $result = $photo->makeEdits($edits, $name, $location);
+        $result = $photo->makeEdits($edits, $name, $location, $username);
 
         if($result)
         {

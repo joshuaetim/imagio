@@ -76,6 +76,8 @@
                 else{
             ?>
         </p>
+
+        <h3>Search results for '<?=$_GET['search']?>'</h3>
         <div class="row justift-content-center main">
             <?php
                 foreach($photoArray as $photo)
