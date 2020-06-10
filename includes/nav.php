@@ -40,8 +40,8 @@
                         <a class="dropdown-item" href="logout">Logout</a>
                     </div>
                 </li>
-                <form class="form-inline float-right" action="/action_page.php">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search Images">
+                <form class="form-inline float-right" action="search.php" method="GET">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search Images" name="search" value="<?=$term ? $term : ''?>"> 
                     <button class="btn btn-warning" type="submit">Search</button>
                 </form>
             </ul>

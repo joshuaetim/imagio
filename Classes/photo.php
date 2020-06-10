@@ -31,6 +31,13 @@ class Photo extends Database
         return array($query, $query->rowCount());
     }
 
+    public function searchImages($term, $user_id)
+    {
+        $query = $this->link->prepare("SELECT * FROM photos WHERE `user_id`= :user_id AND `title` LIKE :term");
+        $query->execute([':user_id' => $user_id, ':term' => '%'.$term.'%']);
+        return array($query, $query->rowCount());
+    }
+
     public function updateImage($id, $user_id, $title)
     {
         $query = $this->link->query("UPDATE photos SET `title`='$title' WHERE `id`='$id' AND `user_id`='$user_id'");

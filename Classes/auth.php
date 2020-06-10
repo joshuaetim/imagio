@@ -15,6 +15,12 @@ class Auth extends Database
         return $this->connect();
     }
 
+    public function addUser($username, $password)
+    {
+        $query = $this->link->prepare("INSERT INTO users (`username`, `password`) VALUES (?,?)");
+        $query->execute([$username, $password]);
+        return $query->rowCount();
+    }
 
     public function loginUser($username, $password)
     {
