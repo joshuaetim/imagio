@@ -1,5 +1,7 @@
 <?php
 
+    ob_start();
+
     require 'includes/auth_check.php';
 
     require __DIR__.'/vendor/autoload.php';
@@ -143,8 +145,19 @@
 
     if(isset($_POST['addfolder']))
     {
-        $folder = $_POST['folder'];
-        
+        $adapter = new Local(__DIR__.'/storage/'.$mainDir);
+        $filesystem = new Filesystem($adapter);
+        $folder = trim($_POST['folder']);
+        $dirCreate = $filesystem->createDir($folder);
+
+        if($dirCreate)
+        {
+            $_SESSION['message'] = 'Folder created successfully';
+        }
+        else{
+            $_SESSION['message'] = 'Error creating folder';
+        }
+        header("Location: test?root=".$mainDir);
     }
 
 ?>
@@ -159,7 +172,14 @@
 </head>
 <body>
     <div class="container p-3">
-    <form action="test" method="post">
+    <form action="test?root=<?=$_GET['root']?>" method="post">
+    <?php
+        if(isset($_SESSION['message']))
+        {
+            echo $_SESSION['message'] . '<br>';
+            unset($_SESSION['message']);
+        }
+    ?>
         <input type="text" name="folder" placeholder="Folder name...">
         <input type="submit" value="New Folder" name="addfolder">
     </form>

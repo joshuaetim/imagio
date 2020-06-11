@@ -1,16 +1,17 @@
 <?php
 
-    $example = 'nicer/2020MayFri1105582020Apr271104121fungi.jpg';
+require __DIR__.'/vendor/autoload.php';
 
-    var_dump(strpos($example, '/'));
+    use League\Flysystem\Filesystem;
+    use League\Flysystem\Adapter\Local;
 
-    $occur = strpos($example, '/');
+    $adapter = new Local(__DIR__.'/storage');
+    $filesystem = new Filesystem($adapter);
 
-    if($occur)
-    {
-        echo substr($example, 0, $occur);
-    }
+    $adapter = new Local(__DIR__.'/storage/'.'etim/thumbnails');
+    $filesystem = new Filesystem($adapter);
 
-    print "\n";
+    $filesystem->createDir('wow');
+
 
 ?>
